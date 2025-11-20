@@ -10,136 +10,468 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Chargement de Alpine.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
     <style>
-        /* Définition de la police Inter comme police par défaut */
-        body {
-            font-family: 'Inter', sans-serif;
+        body { font-family: 'Inter', sans-serif; }
+        .glow-shadow { box-shadow: 0 10px 30px -10px rgba(220, 38, 38, 0.6); }
+        
+        /* Masquer la barre de défilement */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Animation de pulsation pour le bouton appel */
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
         }
-        /* Style pour la lueur d'ombre rouge (effet "designer") */
-        .glow-shadow {
-            box-shadow: 0 10px 30px -10px rgba(220, 38, 38, 0.6);
+        .animate-pulse-red {
+            animation: pulse-red 2s infinite;
         }
     </style>
     <script>
-        // Configuration de Tailwind (optionnel, mais bon pour les thèmes)
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'brand-red': '#DC2626', // Rouge vif (tailwind red-600)
-                        'brand-dark': '#111827', // Presque noir (tailwind gray-900)
+                        'brand-red': '#DC2626',
+                        'brand-dark': '#111827',
+                        'brand-gold': '#F59E0B',
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-gradient-to-br from-black to-brand-dark min-h-screen flex items-center justify-center p-4">
+<body class="bg-gradient-to-br from-black to-brand-dark min-h-screen flex flex-col items-center p-4 pb-24">
 
-    <!-- Carte principale -->
-    <div class="w-full max-w-md mx-auto">
-        <!-- Logo (qui "flotte" au-dessus de la carte) -->
-        <div class="relative z-10 flex justify-center">
+    <!-- Conteneur Principal -->
+    <div class="w-full max-w-md mx-auto relative">
+        
+        <!-- Logo Flottant -->
+        <div class="relative z-20 flex justify-center mb-[-4rem]">
             <img 
                 src="https://i.postimg.cc/mr9SxJT5/IVOIRE-FITNESS.jpg" 
                 alt="Logo Ivoire Fitness" 
-                class="w-36 h-36 sm:w-40 sm:h-40 rounded-full border-4 border-brand-red shadow-2xl glow-shadow"
-                onerror="this.alt='Logo Ivoire Fitness'; this.src='https://placehold.co/160x160/DC2626/white?text=IF';">
+                class="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-brand-red shadow-2xl glow-shadow bg-black object-cover"
+                onerror="this.src='https://placehold.co/160x160/DC2626/white?text=IF';">
         </div>
 
-        <!-- Contenu de la carte -->
-        <div class="bg-brand-dark rounded-2xl shadow-xl p-6 sm:p-8 -mt-18 sm:-mt-20 pt-24 sm:pt-28 text-center text-white">
+        <!-- Carte Contenu -->
+        <div class="bg-brand-dark rounded-3xl shadow-2xl pt-20 pb-8 px-6 border border-gray-800 relative overflow-hidden">
+            
+            <!-- Décoration -->
+            <div class="absolute top-0 left-0 w-full h-2 bg-brand-red"></div>
 
-            <!-- Titre et Slogan -->
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-white">IVOIRE FITNESS</h1>
-            <p class="text-xl font-semibold text-brand-red mt-1 mb-6">Votre Objectif, Notre Mission</p>
+            <!-- En-tête & Localisation -->
+            <div class="text-center text-white mb-8">
+                <h1 class="text-3xl font-black uppercase tracking-wide">Ivoire Fitness</h1>
+                <p class="text-brand-red font-bold text-lg">Votre Objectif, Notre Mission</p>
+                
+                <div class="flex flex-col items-center justify-center gap-2 mt-3">
+                    <div class="flex items-center text-gray-400 text-sm">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span>Marcory Remblais, face grand marché</span>
+                    </div>
+                    <!-- Bouton Google Maps -->
+                    <a href="https://share.google/FCp3nlWBAPQW06m4X" target="_blank" class="inline-flex items-center px-4 py-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-full text-xs font-bold text-white transition-colors mt-2">
+                        📍 Y Aller (Itinéraire)
+                    </a>
+                </div>
+            </div>
 
-            <!-- Description et Localisation -->
-            <div class="text-gray-300 text-base sm:text-lg mb-6">
-                <p>
-                    Rejoignez la meilleure salle de sport à 
-                    <strong class="text-white">Marcory remblais</strong>,
-                    juste en face du grand marché.
+            <!-- VISION FONDATEURS (Carte Lien avec image 081A0004.jpg) -->
+            <div class="mb-8">
+                <h2 class="text-white font-bold text-center mb-3 uppercase text-sm tracking-wider">Le Mot des Fondateurs</h2>
+                <a href="https://web.facebook.com/share/v/17irmEoKXE/" target="_blank" rel="noopener noreferrer" class="block relative rounded-xl overflow-hidden shadow-lg border border-gray-700 group aspect-video">
+                    <!-- Image de fond -->
+                    <img src="https://i.postimg.cc/GtpPLwYv/081A0004.jpg" alt="Vidéo Fondateurs" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 filter brightness-50">
+                    
+                    <!-- Overlay Bouton Play -->
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <div class="w-16 h-16 bg-brand-red/90 rounded-full flex items-center justify-center mb-2 shadow-xl group-hover:scale-110 transition-transform duration-300 border-2 border-white/20">
+                            <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <span class="text-white font-bold text-sm uppercase tracking-wider drop-shadow-md">Regarder la vidéo</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- OFFRE SPECIALE -->
+            <div class="bg-gradient-to-r from-yellow-600 to-yellow-500 rounded-xl p-4 mb-4 text-center shadow-lg border border-yellow-400 relative overflow-hidden">
+                <div class="absolute top-0 right-0 -mt-2 -mr-2 w-8 h-8 bg-white opacity-20 rotate-45"></div>
+                <p class="text-black font-extrabold text-sm uppercase flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    Offre Tout Inclus
                 </p>
-                <p class="mt-2">
-                    Profitez de toutes les commodités et d'un équipement de pointe pour transformer votre corps.
+                <p class="text-black font-semibold text-xs mt-1 leading-tight">
+                    Accès illimité aux cours collectifs & Suivi Coach Personnalisé
                 </p>
             </div>
 
-            <!-- Horaires d'ouverture -->
-            <div class="bg-gray-800 rounded-lg p-4 mb-8 text-left max-w-xs mx-auto">
-                <h2 class="text-lg font-bold text-center text-white mb-3">Nos Horaires</h2>
-                <ul class="space-y-2 text-gray-200">
-                    <li class="flex justify-between items-center">
-                        <span class="font-semibold text-white">Lundi - Vendredi:</span>
-                        <span class="bg-gray-700 px-2 py-0.5 rounded-full text-sm">06h00 - 22h00</span>
-                    </li>
-                    <li class="flex justify-between items-center">
-                        <span class="font-semibold text-white">Samedi:</span>
-                        <span class="bg-gray-700 px-2 py-0.5 rounded-full text-sm">06h00 - 20h00</span>
-                    </li>
-                    <li class="flex justify-between items-center">
-                        <span class="font-semibold text-white">Dimanche:</span>
-                        <span class="bg-gray-700 px-2 py-0.5 rounded-full text-sm">06h00 - 12h00</span>
-                    </li>
-                </ul>
+            <!-- TARIFS -->
+            <div class="grid grid-cols-2 gap-4 mb-8">
+                <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 text-center flex flex-col justify-center">
+                    <p class="text-gray-400 text-xs uppercase font-bold mb-1">La Séance</p>
+                    <p class="text-brand-red text-2xl font-black">3 000 F</p>
+                    <p class="text-gray-500 text-[10px]">Accès Journée</p>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-xl border-2 border-brand-red text-center flex flex-col justify-center relative shadow-lg">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-brand-red text-white text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">BEST SELLER</div>
+                    <p class="text-gray-300 text-xs uppercase font-bold mb-1">Abonnement</p>
+                    <p class="text-white text-2xl font-black">30 000 F</p>
+                    <p class="text-gray-400 text-[10px]">Mensuel / Illimité</p>
+                </div>
             </div>
 
-            <!-- Liens (Appels à l'action solides) -->
-            <div class="flex flex-col gap-4">
+            <!-- GALERIE PHOTO -->
+            <div class="mb-8">
+                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-brand-red rounded-full"></span>
+                    La Salle en Images
+                </h2>
+                <!-- Carrousel Horizontal -->
+                <div class="flex overflow-x-auto no-scrollbar gap-3 snap-x snap-mandatory pb-4">
+                    <!-- Nouvelles Images -->
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/L6C8JqYz/081A0002.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/dtt0QR1h/081A0068.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/SNNKQLsy/081A0131.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/J7QnWYRv/081A0143.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/wxkvd46d/081A0384.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/bJxvr3kH/081A0413.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/26Q5y2hd/081A0420.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/ydmNxvcD/081A0497.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/nhrM2KfJ/081A0524.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/mDYrk8CC/081A0529.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    
+                    <!-- Anciennes Images -->
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/GtpPLwYv/081A0004.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/WzfGtW6g/081A0006.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/SRt6jT7t/081A0007.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/Wp969zLh/081A0010.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/RCPQPh5b/081A0011.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/3wgF9ZY5/081A0012.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/j5cQYdDg/081A0013.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/vBbLK6Zj/081A0014.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/4dPbRNYM/081A0015.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/V6gBPLJH/081A0016.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/MT5bJKnC/081A0018.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/gJsqbkwc/081A0019.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/4yF6nLbh/081A0021.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/Cx8GL4ZR/081A0024.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/4Nqvg03y/081A0034.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/7Yd1kRLx/081A0035.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/hP68BYGt/081A0037.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/fLzmCn85/081A0040.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/SsSCdFg5/081A0045.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/NMsmDqdd/081A0046.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/65kZSGH9/081A0049.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/X7GFQggS/081A0053.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/9MmZb5Lb/081A0055.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/15n6JKKf/081A0093.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/8c3vTFNb/081A0098.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="snap-center shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 shadow-md relative"><img src="https://i.postimg.cc/WbFrX7wy/081A0171.jpg" class="w-full h-full object-cover" loading="lazy"></div>
+                </div>
+                <p class="text-right text-gray-500 text-xs italic mr-2">Glissez pour voir plus ➡️</p>
+            </div>
 
+            <!-- Horaires -->
+            <div class="bg-gray-800/50 rounded-xl p-4 mb-8 border border-gray-700">
+                <h3 class="text-white font-bold text-center mb-3 uppercase text-sm tracking-wider">Horaires d'ouverture</h3>
+                <div class="grid grid-cols-3 gap-2 text-center">
+                    <div class="flex flex-col">
+                        <span class="text-gray-400 text-xs">Lun-Ven</span>
+                        <span class="text-white font-bold text-sm">06h-22h</span>
+                    </div>
+                    <div class="flex flex-col border-l border-gray-700">
+                        <span class="text-gray-400 text-xs">Samedi</span>
+                        <span class="text-white font-bold text-sm">06h-20h</span>
+                    </div>
+                    <div class="flex flex-col border-l border-gray-700">
+                        <span class="text-gray-400 text-xs">Dimanche</span>
+                        <span class="text-white font-bold text-sm">06h-12h</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PLANNING COURS -->
+            <div x-data="{ activeTab: 'Lundi' }" class="mb-10">
+                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-brand-red rounded-full"></span>
+                    Planning des Cours
+                </h2>
+
+                <!-- Onglets -->
+                <div class="flex overflow-x-auto no-scrollbar gap-2 pb-4 mb-2">
+                    <template x-for="day in ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']">
+                        <button 
+                            @click="activeTab = day"
+                            :class="activeTab === day ? 'bg-brand-red text-white border-brand-red' : 'bg-gray-800 text-gray-400 border-gray-700 hover:bg-gray-700'"
+                            class="flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border transition-all duration-300"
+                            x-text="day">
+                        </button>
+                    </template>
+                </div>
+
+                <!-- Contenu Onglets -->
+                <div class="bg-gray-900 rounded-xl p-4 border border-gray-800 min-h-[180px]">
+                    <!-- LUNDI -->
+                    <div x-show="activeTab === 'Lundi'" x-transition.opacity class="space-y-3">
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-orange-500">
+                            <span class="text-white font-bold">Ivoire Cross Training</span>
+                            <span class="text-orange-400 text-sm font-mono">06:30</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-red-500">
+                            <span class="text-white font-bold">Ivoire Full Body</span>
+                            <span class="text-red-400 text-sm font-mono">18:30</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-blue-500">
+                            <span class="text-white font-bold">Body Combat</span>
+                            <span class="text-blue-400 text-sm font-mono">19:30</span>
+                        </div>
+                    </div>
+                    <!-- MARDI -->
+                    <div x-show="activeTab === 'Mardi'" x-transition.opacity class="space-y-3">
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-blue-600">
+                            <span class="text-white font-bold">Body Pump</span>
+                            <span class="text-blue-400 text-sm font-mono">06:30</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-green-500">
+                            <span class="text-white font-bold">Ivoire HIIT</span>
+                            <span class="text-green-400 text-sm font-mono">18:30</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-orange-500">
+                            <span class="text-white font-bold">Body Attack</span>
+                            <span class="text-orange-400 text-sm font-mono">19:30</span>
+                        </div>
+                    </div>
+                    <!-- MERCREDI -->
+                    <div x-show="activeTab === 'Mercredi'" x-transition.opacity class="space-y-3">
+                         <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-orange-500">
+                            <span class="text-white font-bold">Ivoire Cross Training</span>
+                            <span class="text-orange-400 text-sm font-mono">06:30</span>
+                        </div>
+                         <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-green-500">
+                            <span class="text-white font-bold">Taekwondo Kids</span>
+                            <span class="text-green-400 text-sm font-mono">15:00</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-blue-500">
+                            <span class="text-white font-bold">Body Combat</span>
+                            <span class="text-blue-400 text-sm font-mono">18:30</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-purple-500">
+                            <span class="text-white font-bold">Pilates</span>
+                            <span class="text-purple-400 text-sm font-mono">19:30</span>
+                        </div>
+                    </div>
+                    <!-- JEUDI -->
+                    <div x-show="activeTab === 'Jeudi'" x-transition.opacity class="space-y-3">
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-red-500">
+                            <span class="text-white font-bold">Body Combat</span>
+                            <span class="text-red-400 text-sm font-mono">06:30</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-green-500">
+                            <span class="text-white font-bold">Ivoire HIIT</span>
+                            <span class="text-green-400 text-sm font-mono">18:30</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-blue-600">
+                            <span class="text-white font-bold">Body Pump</span>
+                            <span class="text-blue-400 text-sm font-mono">19:30</span>
+                        </div>
+                    </div>
+                    <!-- VENDREDI -->
+                    <div x-show="activeTab === 'Vendredi'" x-transition.opacity class="space-y-3">
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-orange-500">
+                            <span class="text-white font-bold">Ivoire Cross Training</span>
+                            <span class="text-orange-400 text-sm font-mono">06:30</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-red-500">
+                            <span class="text-white font-bold">Body Combat</span>
+                            <span class="text-red-400 text-sm font-mono">18:30</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-cyan-500">
+                            <span class="text-white font-bold">Djamboola Fitness</span>
+                            <span class="text-cyan-400 text-sm font-mono">19:30</span>
+                        </div>
+                    </div>
+                    <!-- SAMEDI -->
+                    <div x-show="activeTab === 'Samedi'" x-transition.opacity class="space-y-3">
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-blue-500">
+                            <span class="text-white font-bold">Body Attack</span>
+                            <span class="text-blue-400 text-sm font-mono">07:00</span>
+                        </div>
+                         <div class="flex items-center justify-between bg-gray-800 p-3 rounded-lg border-l-4 border-green-500">
+                            <span class="text-white font-bold">Taekwondo Kids</span>
+                            <span class="text-green-400 text-sm font-mono">09:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCORDEON DISCIPLINES -->
+            <div class="mb-10" x-data="{ openCourse: null }">
+                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-brand-red rounded-full"></span>
+                    Nos Disciplines
+                </h2>
+                
+                <div class="space-y-2">
+                    <!-- Pump -->
+                    <div class="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden">
+                        <button @click="openCourse === 'pump' ? openCourse = null : openCourse = 'pump'" class="w-full px-4 py-3 flex justify-between items-center text-left">
+                            <span class="text-white font-semibold">🏋️ Body Pump</span>
+                            <svg class="w-5 h-5 text-gray-500 transition-transform" :class="openCourse === 'pump' ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="openCourse === 'pump'" class="px-4 pb-3 text-gray-400 text-sm bg-gray-800/50">
+                            Sculptez votre corps avec des poids légers et beaucoup de répétitions. Résultats rapides garantis.
+                        </div>
+                    </div>
+                     <!-- Combat -->
+                     <div class="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden">
+                        <button @click="openCourse === 'combat' ? openCourse = null : openCourse = 'combat'" class="w-full px-4 py-3 flex justify-between items-center text-left">
+                            <span class="text-white font-semibold">🥊 Body Combat</span>
+                            <svg class="w-5 h-5 text-gray-500 transition-transform" :class="openCourse === 'combat' ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="openCourse === 'combat'" class="px-4 pb-3 text-gray-400 text-sm bg-gray-800/50">
+                            Défoulez-vous sur des mouvements d'arts martiaux. Cardio intense, zéro contact, pure énergie.
+                        </div>
+                    </div>
+                    <!-- HIIT -->
+                    <div class="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden">
+                        <button @click="openCourse === 'hiit' ? openCourse = null : openCourse = 'hiit'" class="w-full px-4 py-3 flex justify-between items-center text-left">
+                            <span class="text-white font-semibold">⚡ Ivoire HIIT</span>
+                            <svg class="w-5 h-5 text-gray-500 transition-transform" :class="openCourse === 'hiit' ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="openCourse === 'hiit'" class="px-4 pb-3 text-gray-400 text-sm bg-gray-800/50">
+                            Brûlez un max de calories en un minimum de temps. L'entraînement idéal pour sécher.
+                        </div>
+                    </div>
+                    <!-- Cross -->
+                    <div class="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden">
+                        <button @click="openCourse === 'cross' ? openCourse = null : openCourse = 'cross'" class="w-full px-4 py-3 flex justify-between items-center text-left">
+                            <span class="text-white font-semibold">🔥 Cross Training</span>
+                            <svg class="w-5 h-5 text-gray-500 transition-transform" :class="openCourse === 'cross' ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="openCourse === 'cross'" class="px-4 pb-3 text-gray-400 text-sm bg-gray-800/50">
+                            Polyvalence et puissance. Des mouvements fonctionnels pour être fort dans la vie de tous les jours.
+                        </div>
+                    </div>
+                     <!-- Djamboola -->
+                     <div class="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden">
+                        <button @click="openCourse === 'djamboola' ? openCourse = null : openCourse = 'djamboola'" class="w-full px-4 py-3 flex justify-between items-center text-left">
+                            <span class="text-white font-semibold">💃 Djamboola</span>
+                            <svg class="w-5 h-5 text-gray-500 transition-transform" :class="openCourse === 'djamboola' ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="openCourse === 'djamboola'" class="px-4 pb-3 text-gray-400 text-sm bg-gray-800/50">
+                            L'ambiance africaine au service de votre cardio. On danse, on transpire, on s'amuse !
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONFORT & COMMODITES (Déplacé en bas) -->
+            <div class="mb-10 bg-gray-800/40 rounded-xl p-5 border border-gray-700">
+                <h3 class="text-white font-bold text-center mb-4 uppercase text-sm tracking-wider text-brand-red">Confort & Hygiène</h3>
+                <div class="grid grid-cols-3 gap-2">
+                    <!-- Item 1 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center mb-2 text-white">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
+                        <p class="text-white text-[10px] font-bold">Vestiaires Séparés</p>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center mb-2 text-white">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"></path></svg>
+                        </div>
+                        <p class="text-white text-[10px] font-bold">Douches H/F</p>
+                    </div>
+                    <!-- Item 3 (Nouveau) -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-10 h-10 bg-brand-red rounded-full flex items-center justify-center mb-2 text-white">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <p class="text-white text-[10px] font-bold uppercase">Serviette Obligatoire</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TEMOIGNAGES -->
+            <div class="mb-10">
+                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-brand-red rounded-full"></span>
+                    Ils nous font confiance
+                </h2>
+                <div class="space-y-4">
+                    <div class="bg-gray-800 p-4 rounded-lg border-l-2 border-brand-red">
+                        <p class="text-gray-300 text-sm italic mb-2">"Enfin une salle pro à Marcory Remblais ! Les équipements sont top qualité et c'est aéré. Je recommande !"</p>
+                        <p class="text-white text-xs font-bold text-right">- Sarah K.</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg border-l-2 border-brand-red">
+                        <p class="text-gray-300 text-sm italic mb-2">"Le suivi des coachs fait toute la différence. 30.000F pour tout ça, c'est le meilleur rapport qualité-prix du quartier."</p>
+                        <p class="text-white text-xs font-bold text-right">- Ahmed D.</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg border-l-2 border-brand-red">
+                        <p class="text-gray-300 text-sm italic mb-2">"Ambiance familiale mais sérieuse. Les cours de Body Combat le soir me permettent de tout lâcher après le boulot."</p>
+                        <p class="text-white text-xs font-bold text-right">- Marie-Ange Y.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESEAUX SOCIAUX -->
+            <div class="space-y-3">
                 <!-- TikTok -->
-                <a href="https://www.tiktok.com/@ivoire.fitness" target="_blank" rel="noopener noreferrer"
-                   class="flex items-center justify-center gap-3 w-full text-lg font-bold px-4 py-3.5 rounded-lg shadow-lg transition-transform duration-200 ease-in-out transform hover:scale-105 bg-black hover:bg-gray-800 text-white border border-gray-700">
-                    <!-- Icône TikTok (SVG) -->
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.01.95-.02 1.9-.02 2.84 0 2.63-1.8 4.9-4.32 5.52-2.5.6-4.95-.64-6.17-2.88-1.25-2.25-1.04-5.02.52-7.04 1.5-1.9 3.93-3.08 6.5-3.21v4.03c-1.11.02-2.22.18-3.3.51-1.07.33-2.1.8-3.03 1.53l-.01-.01c.21-2.02 1.67-3.87 3.7-4.66 2.02-.79 4.2-.78 6.22.05-.02-1.3-.04-2.6-.07-3.9z" />
-                    </svg>
-                    Découvrez-nous sur TikTok
+                <a href="https://www.tiktok.com/@ivoire.fitness" target="_blank" class="group flex items-center justify-between px-5 py-4 bg-gray-900 border border-gray-700 hover:border-white rounded-xl transition-all shadow-lg">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-black p-2 rounded-lg">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.01.95-.02 1.9-.02 2.84 0 2.63-1.8 4.9-4.32 5.52-2.5.6-4.95-.64-6.17-2.88-1.25-2.25-1.04-5.02.52-7.04 1.5-1.9 3.93-3.08 6.5-3.21v4.03c-1.11.02-2.22.18-3.3.51-1.07.33-2.1.8-3.03 1.53l-.01-.01c.21-2.02 1.67-3.87 3.7-4.66 2.02-.79 4.2-.78 6.22.05-.02-1.3-.04-2.6-.07-3.9z"/></svg>
+                        </div>
+                        <span class="text-white font-bold">Nous suivre sur TikTok</span>
+                    </div>
+                    <svg class="w-5 h-5 text-gray-500 group-hover:text-white transform group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </a>
-                
                 <!-- Instagram -->
-                <a href="https://www.instagram.com/ivoire_fitness?igsh=MW95a2Z6N2psdjlzYQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer"
-                   class="flex items-center justify-center gap-3 w-full text-lg font-bold px-4 py-3.5 rounded-lg shadow-lg transition-transform duration-200 ease-in-out transform hover:scale-105 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white">
-                    <!-- Icône Instagram (SVG) -->
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M12 1.604c-3.25 0-3.647.014-4.91.071-1.26.058-2.12.247-2.88.543a4.01 4.01 0 00-1.46 1.46c-.296.76-.485 1.62-.543 2.88-.057 1.263-.071 1.66-.071 4.91s.014 3.647.071 4.91c.058 1.26.247 2.12.543 2.88a4.01 4.01 0 001.46 1.46c.76.296 1.62.485 2.88.543 1.263.057 1.66.071 4.91.071s3.647-.014 4.91-.071c1.26-.058 2.12-.247 2.88-.543a4.01 4.01 0 001.46-1.46c.296-.76.485-1.62.543-2.88.057-1.263.071-1.66.071-4.91s-.014-3.647-.071-4.91c-.058-1.26-.247-2.12-.543-2.88a4.01 4.01 0 00-1.46-1.46c-.76-.296-1.62-.485-2.88-.543C15.647 1.618 15.25 1.604 12 1.604zM12 0c3.28 0 3.69.014 4.98.072 1.29.058 2.3.25 3.16.57a5.59 5.59 0 012.02 2.02c.32.86.512 1.87.57 3.16.058 1.29.072 1.7.072 4.98s-.014 3.69-.072 4.98c-.058 1.29-.25 2.3-.57 3.16a5.59 5.59 0 01-2.02 2.02c-.86.32-1.87.512-3.16.57-1.29.058-1.7.072-4.98.072s-3.69-.014-4.98-.072c-1.29-.058-2.3-.25-3.16-.57a5.59 5.59 0 01-2.02-2.02c-.32-.86-.512-1.87-.57-3.16C.014 15.69 0 15.28 0 12s.014-3.69.072-4.98c.058-1.29.25-2.3.57-3.16A5.59 5.59 0 012.66 2.66c.86-.32 1.87-.512 3.16-.57C7.11.014 7.52 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z" clip-rule="evenodd" />
-                    </svg>
-                    Suivez-nous sur Instagram
+                <a href="https://www.instagram.com/ivoire_fitness?igsh=MW95a2Z6N2psdjlzYQ%3D%3D&utm_source=qr" target="_blank" class="group flex items-center justify-between px-5 py-4 bg-gradient-to-r from-pink-600 to-purple-600 rounded-xl transition-all shadow-lg hover:shadow-pink-500/30">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 1.604c-3.25 0-3.647.014-4.91.071-1.26.058-2.12.247-2.88.543a4.01 4.01 0 00-1.46 1.46c-.296.76-.485 1.62-.543 2.88-.057 1.263-.071 1.66-.071 4.91s.014 3.647.071 4.91c.058 1.26.247 2.12.543 2.88a4.01 4.01 0 001.46 1.46c.76.296 1.62.485 2.88.543 1.263.057 1.66.071 4.91.071s3.647-.014 4.91-.071c1.26-.058 2.12-.247 2.88-.543a4.01 4.01 0 001.46-1.46c.296-.76.485-1.62.543-2.88.057-1.263.071-1.66.071-4.91s-.014-3.647-.071-4.91c-.058-1.26-.247-2.12-.543-2.88a4.01 4.01 0 00-1.46-1.46c-.76-.296-1.62-.485-2.88-.543C15.647 1.618 15.25 1.604 12 1.604zM12 0c3.28 0 3.69.014 4.98.072 1.29.058 2.3.25 3.16.57a5.59 5.59 0 012.02 2.02c.32.86.512 1.87.57 3.16.058 1.29.072 1.7.072 4.98s-.014 3.69-.072 4.98c-.058 1.29-.25 2.3-.57 3.16a5.59 5.59 0 01-2.02 2.02c-.86.32-1.87.512-3.16.57-1.29.058-1.7.072-4.98.072s-3.69-.014-4.98-.072c-1.29-.058-2.3-.25-3.16-.57a5.59 5.59 0 01-2.02-2.02c-.32-.86-.512-1.87-.57-3.16C.014 15.69 0 15.28 0 12s.014-3.69.072-4.98c.058-1.29.25-2.3.57-3.16A5.59 5.59 0 012.66 2.66c.86-.32 1.87-.512 3.16-.57C7.11.014 7.52 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z" clip-rule="evenodd" /></svg>
+                        <span class="text-white font-bold">Instagram</span>
+                    </div>
+                    <svg class="w-5 h-5 text-white/70 group-hover:text-white transform group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </a>
-
                 <!-- Facebook -->
-                <a href="https://www.facebook.com/share/17VMLfgQDN/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"
-                   class="flex items-center justify-center gap-3 w-full text-lg font-bold px-4 py-3.5 rounded-lg shadow-lg transition-transform duration-200 ease-in-out transform hover:scale-105 bg-blue-600 hover:bg-blue-500 text-white">
-                    <!-- Icône Facebook (SVG) -->
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
-                    </svg>
-                    Aimez notre page Facebook
+                <a href="https://www.facebook.com/share/17VMLfgQDN/?mibextid=wwXIfr" target="_blank" class="group flex items-center justify-between px-5 py-4 bg-blue-700 hover:bg-blue-600 rounded-xl transition-all shadow-lg">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                        <span class="text-white font-bold">Facebook</span>
+                    </div>
+                    <svg class="w-5 h-5 text-white/70 group-hover:text-white transform group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </a>
-                
                 <!-- WhatsApp -->
-                <a href="https://chat.whatsapp.com/HLgptjA5PBAHQu6XqyHrEY?mode=wwt" target="_blank" rel="noopener noreferrer"
-                   class="flex items-center justify-center gap-3 w-full text-lg font-bold px-4 py-3.5 rounded-lg shadow-lg transition-transform duration-200 ease-in-out transform hover:scale-105 bg-green-500 hover:bg-green-400 text-white">
-                    <!-- Icône WhatsApp (SVG) -->
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.06 22L7.32 20.62C8.75 21.41 10.36 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 6.45 17.5 2 12.04 2ZM12.04 20.13C10.5 20.13 9.02 19.7 7.76 18.96L7.4 18.74L4.2 19.57L5.05 16.48L4.82 16.11C3.98 14.79 3.53 13.3 3.53 11.91C3.53 7.32 7.39 3.47 12.04 3.47C16.69 3.47 20.55 7.32 20.55 11.91C20.55 16.5 16.69 20.13 12.04 20.13ZM16.56 14.45C16.31 14.32 15.06 13.7 14.84 13.62C14.62 13.54 14.47 13.5 14.32 13.75C14.17 13.99 13.67 14.61 13.52 14.78C13.37 14.95 13.22 14.97 12.97 14.85C12.72 14.72 11.86 14.42 10.84 13.5C10.02 12.76 9.47 11.82 9.32 11.57C9.17 11.32 9.29 11.19 9.41 11.07C9.52 10.96 9.67 10.77 9.82 10.6C9.97 10.42 10.02 10.3 10.12 10.1C10.22 9.9 10.17 9.75 10.09 9.62C10.02 9.5 9.47 8.1 9.25 7.58C9.03 7.06 8.8 7.16 8.68 7.15C8.56 7.14 8.41 7.14 8.26 7.14C8.11 7.14 7.89 7.19 7.72 7.44C7.54 7.69 7.02 8.16 7.02 9.21C7.02 10.26 7.74 11.25 7.86 11.4C8 11.55 9.25 13.51 11.2 14.34C13.15 15.17 13.8 14.86 14.2 14.81C14.6 14.76 15.63 14.21 15.83 13.91C16.03 13.61 16.03 13.36 15.98 13.24C15.93 13.12 15.81 13 15.56 12.87" />
-                    </svg>
-                    Rejoignez le groupe WhatsApp
+                <a href="https://chat.whatsapp.com/HLgptjA5PBAHQu6XqyHrEY?mode=wwt" target="_blank" class="group flex items-center justify-between px-5 py-4 bg-green-600 hover:bg-green-500 rounded-xl transition-all shadow-lg">
+                    <div class="flex items-center gap-3 w-full overflow-hidden">
+                        <svg class="w-8 h-8 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.06 22L7.32 20.62C8.75 21.41 10.36 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 6.45 17.5 2 12.04 2ZM12.04 20.13C10.5 20.13 9.02 19.7 7.76 18.96L7.4 18.74L4.2 19.57L5.05 16.48L4.82 16.11C3.98 14.79 3.53 13.3 3.53 11.91C3.53 7.32 7.39 3.47 12.04 3.47C16.69 3.47 20.55 7.32 20.55 11.91C20.55 16.5 16.69 20.13 12.04 20.13ZM16.56 14.45C16.31 14.32 15.06 13.7 14.84 13.62C14.62 13.54 14.47 13.5 14.32 13.75C14.17 13.99 13.67 14.61 13.52 14.78C13.37 14.95 13.22 14.97 12.97 14.85C12.72 14.72 11.86 14.42 10.84 13.5C10.02 12.76 9.47 11.82 9.32 11.57C9.17 11.32 9.29 11.19 9.41 11.07C9.52 10.96 9.67 10.77 9.82 10.6C9.97 10.42 10.02 10.3 10.12 10.1C10.22 9.9 10.17 9.75 10.09 9.62C10.02 9.5 9.47 8.1 9.25 7.58C9.03 7.06 8.8 7.16 8.68 7.15C8.56 7.14 8.41 7.14 8.26 7.14C8.11 7.14 7.89 7.19 7.72 7.44C7.54 7.69 7.02 8.16 7.02 9.21C7.02 10.26 7.74 11.25 7.86 11.4C8 11.55 9.25 13.51 11.2 14.34C13.15 15.17 13.8 14.86 14.2 14.81C14.6 14.76 15.63 14.21 15.83 13.91C16.03 13.61 16.03 13.36 15.98 13.24C15.93 13.12 15.81 13 15.56 12.87" /></svg>
+                        <span class="text-white font-bold truncate">Rejoindre Groupe WhatsApp</span>
+                    </div>
+                    <svg class="w-5 h-5 text-white/70 group-hover:text-white transform group-hover:translate-x-1 transition-all flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </a>
             </div>
-
         </div>
 
         <!-- Footer -->
-        <footer class="text-center mt-6 text-gray-500 text-sm">
-            &copy; <span id="currentYear"></span> Ivoire Fitness. Tous droits réservés.
-        </footer>
-    </div>
+        <div class="text-center mt-8 pb-4">
+            <p class="text-gray-500 text-xs">© Ivoire Fitness.</p>
+            <p class="text-gray-600 text-[10px] mt-1">Design by Sylla</p>
+        </div>
 
-    <script>
-        // Script simple pour afficher l'année en cours dans le footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-    </script>
+        <!-- BOUTON APPEL FLOTTANT (Sticky) -->
+        <div class="fixed bottom-6 right-6 z-50">
+            <a href="tel:0713707373" class="flex items-center justify-center w-14 h-14 bg-brand-red rounded-full shadow-lg animate-pulse-red hover:scale-110 transition-transform">
+                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            </a>
+        </div>
+    </div>
 </body>
 </html>
